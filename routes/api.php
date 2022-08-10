@@ -20,4 +20,11 @@ Route::post('answer', [AnswerController::class , 'store'])->name('api.answer.pos
 Route::put('answer/update/{id}', [AnswerController::class , 'update'])->name('api.answer.update');
 Route::delete('answer/{id}', [AnswerController::class , 'destroy'])->name('api.answer.destroy');
 
+Route::apiResource('subject',\App\Http\Controllers\Api\SubjectController::class);
+Route::apiResource('sub_major',\App\Http\Controllers\Api\SubMajorController::class);
+Route::apiResource('sup_subject',\App\Http\Controllers\Api\SupSubjectController::class);
+Route::post('login',[\App\Http\Controllers\Api\StudenController::class,'login'])->name('api.login');
+Route::post('student',[\App\Http\Controllers\Api\StudenController::class,'store'])->name('student.store');
+
+
 //Route::middleware('auth:sanctum')->group();

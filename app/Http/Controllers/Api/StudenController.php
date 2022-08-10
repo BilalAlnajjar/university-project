@@ -7,6 +7,7 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class StudenController extends Controller
 {
@@ -131,6 +132,36 @@ class StudenController extends Controller
         return response($student);
     }
 
+    public function login(Request $request)
+    {
+        $request->validate([
+            'username' => 'required_without:email',
+            'password' => 'required',
+            'email' => 'required_without:username'
+        ]);
+        $user = null;
+        if ($request->username) {
+            $user = Student::where('username', $request->username)->first();
+        } else if ($request->email) {
+            $user = Student::where('email', $request->email)->first();
+        }
+
+        if ($user && Hash::check($request->password, $user->password)) {
+            $token = Str::random(64);
+
+            $user->api_token = $token;
+            $user->save();
+
+            return [
+                'token' => $token,
+            ];
+        }
+
+        return response()->json([
+            'error' => 'Invalid Username Or Password',
+        ]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -144,6 +175,8 @@ class StudenController extends Controller
 
         return response()->json(['message' => 'The student has been successfully deleted']);
     }
+
+
 
 
 
