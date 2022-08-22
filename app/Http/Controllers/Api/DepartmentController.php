@@ -49,9 +49,9 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $department = Department::findOrFail($id)->with(['generalPlan','subMajors'])->get();
+        $department = Department::whereSlug($slug)->with(['generalPlan','subMajors','subjects'])->get();
         return response()->json($department);
     }
 

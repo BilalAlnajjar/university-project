@@ -16,16 +16,16 @@ class CustomerPlaneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $customer_plane = CustomerPlan::paginate(15);
+        $customer_plane = CustomerPlan::whereId($id)->with('subjects')->paginate(15);
         return response()->json($customer_plane);
     }
 
-    public function customerPlansOfStudent($student_id){
-        $customer_plans = CustomerPlan::where('student_id', '==', $student_id)->paginate(15);
-        return response()->json($customer_plans);
-    }
+//    public function customerPlansOfStudent($student_id){
+//        $customer_plans = CustomerPlan::where('student_id', '==', $student_id)->paginate(15);
+//        return response()->json($customer_plans);
+//    }
 
     /**
      * Store a newly created resource in storage.

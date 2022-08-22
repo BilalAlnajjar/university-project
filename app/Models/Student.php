@@ -12,7 +12,7 @@ class Student extends Model implements JWTSubject
     protected $guarded = [];
 
     public function department(){
-        return $this->belongsTo(Department::class,'department_id');
+        return $this->belongsTo(Department::class);
     }
 
     public function customerPlan(){

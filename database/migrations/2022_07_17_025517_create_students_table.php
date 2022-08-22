@@ -19,9 +19,12 @@ return new class extends Migration
             $table->string('username')->nullable();
             $table->string('email');
             $table->string('password');
+            $table->unsignedBigInteger('department_id')->nullable();
             $table->text('api_token')->nullable();
             $table->text('image')->nullable();
             $table->timestamps();
+
+            $table->foreign("department_id")->references("id")->on("departments");
         });
     }
 

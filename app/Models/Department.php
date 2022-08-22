@@ -11,10 +11,14 @@ class Department extends Model
     protected $guarded = [];
 
     public function generalPlan(){
-        return  $this->hasOne(GeneralPlan::class);
+        return  $this->hasOne(GeneralPlan::class,'department_id');
     }
 
     public function subMajors(){
         return $this->belongsToMany(SubMajor::class,'department_sub_major');
+    }
+
+    public function subjects(){
+        return $this->hasMany(Subject::class);
     }
 }

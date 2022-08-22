@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CustomerPlan>
  */
-class CustomerPlaneFactory extends Factory
+class CustomerPlanFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +18,7 @@ class CustomerPlaneFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'student_id' => Student::inRandomOrder()->first()->id,
         ];
     }
 }

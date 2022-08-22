@@ -18,6 +18,7 @@ class DepartmentFactory extends Factory
     public function definition()
     {
         return [
+            'slug' => $this->faker->slug,
             'name' => $this->faker->name,
             'definition' => $this->faker->text,
            'description' => $this->faker->text,

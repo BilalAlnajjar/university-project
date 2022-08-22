@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSubjectRequest;
 use App\Http\Requests\UpdateSubjectRequest;
+use App\Models\Department;
+use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Support\Facades\Validator;
 
@@ -66,6 +68,12 @@ class SubjectController extends Controller
 
         return response()->json($subject);
 
+    }
+
+    public function userSupjects($user_id){
+        $subjects = Student::findOrFail($user_id)->department()->first()->subjects()->with('subSubjects')->get();
+
+        return $subjects;
     }
 
     /**

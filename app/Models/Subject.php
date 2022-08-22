@@ -21,4 +21,8 @@ class Subject extends Model
     public function generalPlans(){
         return  $this->belongsToMany(GeneralPlan::class,'subject_general_plane');
     }
+
+    public function subSubjects(){
+        return $this->hasMany(SupSubject::Class);
+    }
 }
